@@ -17,3 +17,12 @@ Holds the database related files
     * string
 * category id
     * UUID
+* type
+    * Enum
+        * One and Done
+        * Tracked Positive
+        * Tracked Negative
+* current_value 
+    * string
+* goal_value
+    * string
