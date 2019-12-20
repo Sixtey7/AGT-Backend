@@ -22,10 +22,14 @@ def get(item_id):
     return Item.query.filter_by(id=item_id).first()
 
 
-def create(name, item_id=None):
+def create(name, category_id, item_type, current_value, goal_value, item_id=None):
     """Creates a Item given the provided values
 
     :param name: The string name of the Item object
+    :param category_id: The id of the category that the Item belongs to
+    :param item_type: The type of Item this is
+    :param current_value: The current value of the Item
+    :param goal_value: The goal value for the item
     :param item_id: The id to assign to the Item.  If not provided, a uuid will be generated
     :return The created Item object
     :rtype Item
@@ -34,7 +38,8 @@ def create(name, item_id=None):
     if item_id is None:
         item_id = str(uuid4())
 
-    new_item = Item(id=item_id, name=name)
+    new_item = Item(id=item_id, name=name, category_id=category_id, item_type=item_type,
+                    current_value=current_value, goal_value=goal_value)
 
     db.session.add(new_item)
     db.session.commit()

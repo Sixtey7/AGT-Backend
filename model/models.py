@@ -41,13 +41,13 @@ class Item(db.Model):
     id = Column(String, primary_key=True)
     name = Column(String)
     category_id = Column(String, ForeignKey('category.id'))
-    type = Column(Enum(ItemType))
+    item_type = Column(Enum(ItemType))
     current_value = Column(String)
     goal_value = Column(String)
 
     def __repr__(self):
-        return "<Item(id='%s', name='%s', type='%s', category_id='%s', current_value='%s', goal_value='%s'>" % \
-               (self.id, self.name, self.type, self.category_id, self.current_value, self.goal_value)
+        return "<Item(id='%s', name='%s', item_type='%s', category_id='%s', current_value='%s', goal_value='%s'>" % \
+               (self.id, self.name, self.item_type, self.category_id, self.current_value, self.goal_value)
 
     def to_obj(self):
         """Returns the object in JSON format
