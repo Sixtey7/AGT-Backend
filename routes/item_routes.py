@@ -61,3 +61,30 @@ def update(item_id):
         abort(400, 'No request body provided')
 
     try:
+        item = ItemDB.update(item_id,
+                             request.json['name'] if 'name' in request.json else None,
+                             request.json['category_id'] if 'category_id' in request.json else None,
+                             request.json['item_type'] if 'item_type' in request.json else None,
+                             request.json['current_value'] if 'current_value' in request.json else None,
+                             request.json['goal_value'] if 'goal_value' in request.json else None)
+
+        return jsonify(item.to_obj()), 200
+    except ValueError:
+        abort(404, 'Could not find Item with provided id')
+
+
+@item_api.route('<string:item_id>', methods=['DELETE'])
+def delete(item_id):
+    """Deletes the specified Item from the database
+
+    :param item_id: The id of the Item to be deleted
+    :return 200 if the Item was successfully deleted, 404 if the Item cannot be found
+    """
+    try:
+        status = ItemDB.delete(item_id)
+        if status:
+            return '', 200
+        else:
+            return '', 500
+    except ValueError:
+        abort(404, 'Could not find Item with the provided id')

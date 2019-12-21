@@ -47,11 +47,15 @@ def create(name, category_id, item_type, current_value, goal_value, item_id=None
     return new_item
 
 
-def update(item_id, name):
+def update(item_id, name, category_id, item_type, current_value, goal_value):
     """Updates the specified Item with the provided value
 
     :param item_id: The id of the Item to be updated
-    :param name: The name to assigned to the specified Item
+    :param name: If provided, the name to set the specified Item to
+    :param category_id: If provided, the category_id to set the specified Item to
+    :param item_type: If provided, the item_type to set the specified Item to
+    :param current_value: If provided, the current_value to set the specified Item to
+    :param goal_value: If provided, the goal_value to set the specified Item to
     :return The updated Item object
     :rtype Item
     :raise ValueError if the Item cannot be found
@@ -62,7 +66,20 @@ def update(item_id, name):
     if item_to_update is None:
         raise ValueError("Could not find Item with provided id %s" % item_id)
 
-    item_to_update.name = name
+    if name is not None:
+        item_to_update.name = name
+
+    if category_id is not None:
+        item_to_update.category_id = category_id
+
+    if item_type is not None:
+        item_to_update.item_type = item_type
+
+    if current_value is not None:
+        item_to_update.current_value = current_value
+
+    if goal_value is not None:
+        item_to_update.goal_value = goal_value
 
     db.session.commit()
 
