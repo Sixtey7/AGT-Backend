@@ -13,7 +13,7 @@ def get_all():
     return jsonify([item.to_obj() for item in ItemDB.get_all()]), 200
 
 
-@item_api.route('<string: item_id', methods=['GET'])
+@item_api.route('<string:item_id>', methods=['GET'])
 def get(item_id):
     """Returns the Item specified by the provided item_id
 
@@ -49,7 +49,7 @@ def create():
     return jsonify(item.to_obj()), 200
 
 
-@item_api.route('<string: item_id>', methods=['PUT'])
+@item_api.route('<string:item_id>', methods=['PUT'])
 def update(item_id):
     """Updates the specified Item with the contents of the request body (in JSON)
     
