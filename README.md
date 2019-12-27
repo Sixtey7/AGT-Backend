@@ -19,3 +19,14 @@ Installed the following through pip3
 * flask
 * sqlalchemy
 * flask-sqlalchemy
+
+## Example Curl Statements
+
+### Categories
+
+#### Add a new
+* curl -H "Content-type: application/json" -i -XPOST -d '{"name":"Sample"}' http://localhost:5000/categories/
+
+### Items
+#### Add a new
+* curl -H "Content-type: application/json" -i -XPOST -d '{"name": "Item 1", "category_id": "397cc2cb-92ff-43b0-81a7-649c4a698156", "item_type": "one_and_done", "current_value":"false", "goal_value": "true"}' http://localhost:5000/items/
