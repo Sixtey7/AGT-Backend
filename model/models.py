@@ -58,5 +58,6 @@ class Item(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'category_id': self.category_id
+            'category_id': self.category_id,
+            'current_value': self.current_value
         }
