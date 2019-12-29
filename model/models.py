@@ -33,6 +33,11 @@ class ItemType(enum.Enum):
     tracked_positive = 2
     tracked_negative = 2
 
+    def to_json(self):
+        """Returns just the name of the value for easy JSON serialization
+        """
+        return self.name
+
 
 class Item(db.Model):
     """Model class used to store Item objects in the database
@@ -59,5 +64,6 @@ class Item(db.Model):
             'id': self.id,
             'name': self.name,
             'category_id': self.category_id,
-            'current_value': self.current_value
+            'current_value': self.current_value,
+            'item_type': self.item_type.to_json()
         }
