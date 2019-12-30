@@ -65,5 +65,6 @@ class Item(db.Model):
             'name': self.name,
             'category_id': self.category_id,
             'current_value': self.current_value,
+            'goal_value': self.goal_value,
             'item_type': self.item_type.to_json()
         }
