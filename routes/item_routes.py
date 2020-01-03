@@ -68,7 +68,8 @@ def update(item_id):
                              request.json['category_id'] if 'category_id' in request.json else None,
                              request.json['item_type'] if 'item_type' in request.json else None,
                              request.json['current_value'] if 'current_value' in request.json else None,
-                             request.json['goal_value'] if 'goal_value' in request.json else None)
+                             request.json['goal_value'] if 'goal_value' in request.json else None,
+                             request.json['goal_date' if 'goal_date' in request.json else None])
 
         return jsonify(item.to_obj()), 200
     except ValueError:
