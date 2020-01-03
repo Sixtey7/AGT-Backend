@@ -24,6 +24,7 @@ def get(item_id):
     if item_obj is None:
         abort(404, 'No Item was found for the provided id!')
 
+    print(item_obj)
     return jsonify(item_obj.to_obj()), 200
 
 
@@ -44,7 +45,8 @@ def create():
                          request.json['item_type'],
                          request.json['current_value'],
                          request.json['goal_value'],
-                         request.json['id'] if 'id' in request.json else None)
+                         request.json['id'] if 'id' in request.json else None,
+                         request.json['goal_date'] if 'goal_date' in request.json else None)
 
     return jsonify(item.to_obj()), 200
 

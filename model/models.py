@@ -1,6 +1,6 @@
 import enum
 from model.database import db
-from sqlalchemy import Column, String, ForeignKey, Enum
+from sqlalchemy import Column, Date, String, ForeignKey, Enum
 from sqlalchemy.orm import relationship
 
 
@@ -49,6 +49,7 @@ class Item(db.Model):
     item_type = Column(Enum(ItemType))
     current_value = Column(String)
     goal_value = Column(String)
+    goal_date = Column(Date)
 
     def __repr__(self):
         return "<Item(id='%s', name='%s', item_type='%s', category_id='%s', current_value='%s', goal_value='%s'>" % \
@@ -66,5 +67,6 @@ class Item(db.Model):
             'category_id': self.category_id,
             'current_value': self.current_value,
             'goal_value': self.goal_value,
-            'item_type': self.item_type.to_json()
+            'item_type': self.item_type.to_json(),
+            'goal_date': self.goal_date if self.goal_date is not None else ''
         }

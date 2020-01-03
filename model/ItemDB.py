@@ -1,6 +1,7 @@
 from model.database import db
 from model.models import Item
 from uuid import uuid4
+from datetime import date
 
 
 def get_all():
@@ -22,7 +23,7 @@ def get(item_id):
     return Item.query.filter_by(id=item_id).first()
 
 
-def create(name, category_id, item_type, current_value, goal_value, item_id=None):
+def create(name, category_id, item_type, current_value, goal_value, item_id=None, goal_date=None):
     """Creates a Item given the provided values
 
     :param name: The string name of the Item object
@@ -31,6 +32,7 @@ def create(name, category_id, item_type, current_value, goal_value, item_id=None
     :param current_value: The current value of the Item
     :param goal_value: The goal value for the item
     :param item_id: The id to assign to the Item.  If not provided, a uuid will be generated
+    :param goal_date: The goal date to assign to the Item.  If not provided, it will be omitted from the entry
     :return The created Item object
     :rtype Item
     """
@@ -38,8 +40,16 @@ def create(name, category_id, item_type, current_value, goal_value, item_id=None
     if item_id is None:
         item_id = str(uuid4())
 
-    new_item = Item(id=item_id, name=name, category_id=category_id, item_type=item_type,
-                    current_value=current_value, goal_value=goal_value)
+    if goal_date is None:
+        new_item = Item(id=item_id, name=name, category_id=category_id, item_type=item_type,
+                        current_value=current_value, goal_value=goal_value)
+    else:
+        date_parts = [int(x) for x in goal_date.split('-')]
+        # TODO: should probably eventually add some validation here
+        date_obj = date(date_parts[0], date_parts[1], date_parts[2])
+
+        new_item = Item(id=item_id, name=name, category_id=category_id, item_type=item_type,
+                        current_value=current_value, goal_value=goal_value, goal_date=date_obj)
 
     db.session.add(new_item)
     db.session.commit()
