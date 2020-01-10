@@ -29,4 +29,4 @@ Installed the following through pip3
 
 ### Items
 #### Add a new
-* curl -H "Content-type: application/json" -i -XPOST -d '{"name": "Item 1", "category_id": "397cc2cb-92ff-43b0-81a7-649c4a698156", "item_type": "one_and_done", "current_value":"false", "goal_value": "true"}' http://localhost:5000/items/
+* curl -H "Content-type: application/json" -i -XPOST -d '{"name": "Item 1", "category_id": "800e11e8-da24-4caf-a854-fa0a4efd751e", "item_type": "one_and_done", "current_value":"false", "goal_value": "true", "goal_date":"2020-01-30"}' http://localhost:5000/items/
