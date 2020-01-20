@@ -26,3 +26,15 @@ Holds the database related files
     * string
 * goal_value
     * string
+* goal_date
+    * date
+    
+### Event
+* id
+    * UUID
+* category_id
+    * UUID
+* value
+    * string
+* date
+    * date

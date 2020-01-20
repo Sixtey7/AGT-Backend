@@ -1,11 +1,10 @@
 import enum
 from model.database import db
 from sqlalchemy import Column, Date, String, ForeignKey, Enum
-from sqlalchemy.orm import relationship
 
 
 class Category(db.Model):
-    """Model class used to store Category objectsi n the database
+    """Model class used to store Category objects in the database
     """
     __tablename__ = "category"
     id = Column(String, primary_key=True)
@@ -69,4 +68,31 @@ class Item(db.Model):
             'goal_value': self.goal_value,
             'item_type': self.item_type.to_json(),
             'goal_date': self.goal_date if self.goal_date is not None else ''
+        }
+
+
+class Event:
+    """Model class used to store Event objects in the database
+    """
+    __tablename__ = 'event'
+    id = Column(String, primary_key=True)
+    category_id = Column(String, ForeignKey('category.id'))
+    value = Column(String)
+    date = Column(Date)
+
+    def __repr__(self):
+        return "<Event(id='%s', category_id='%s', value='%s', date='%s'>" % \
+               (self.id, self.category_id, self.value, self.date)
+
+    def to_obj(self):
+        """Returns the object in JSON format
+
+        :return: String reprentation of the object
+        """
+
+        return {
+            'id': self.id,
+            'category_id': self.category_id,
+            'value': self.value,
+            'date': self.date
         }
