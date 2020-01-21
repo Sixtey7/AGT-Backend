@@ -12,7 +12,7 @@ This includes two types of goals:
 
 
 ## Related Projects
-// TODO: Frontend
+[AGT-Frontend](https://github.com/Sixtey7/AGT-Frontend)
 
 ## Tools Used
 Installed the following through pip3
