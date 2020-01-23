@@ -22,10 +22,12 @@ def get(event_id):
     return Event.query.filter_by(id=event_id).first()
 
 
-def create(name, event_id=None):
+def create(category_id, value, date, event_id=None):
     """Creates a Event given the provided values
 
-    :param name: The string name of the Event object
+    :param category_id: The id of the category associated with the Event
+    :param value: The value of the Event
+    :param date: The date of the Event
     :param event_id: The id to assign to the Event.  If not provided, a uuid will be generated
     :return The created Event object
     :rtype Event
@@ -34,7 +36,7 @@ def create(name, event_id=None):
     if event_id is None:
         event_id = str(uuid4())
 
-    new_event = Event(id=event_id, name=name)
+    new_event = Event(id=event_id, category_id=category_id, value=value, date=date)
 
     db.session.add(new_event)
     db.session.commit()
@@ -42,11 +44,13 @@ def create(name, event_id=None):
     return new_event
 
 
-def update(event_id, name):
+def update(event_id, category_id, value,  date):
     """Updates the specified Event with the provided value
 
     :param event_id: The id of the Event to be updated
-    :param name: The name to assigned to the specified Event
+    :param category_id: The category_id to assign to the specified Event
+    :param value: The value to assign to the specified Event
+    :param date: The date to assign to the specified Event
     :return The updated Event object
     :rtype Event
     :raise ValueError if the Event cannot be found
@@ -57,7 +61,14 @@ def update(event_id, name):
     if event_to_update is None:
         raise ValueError("Could not find Event with provided id %s" % event_id)
 
-    event_to_update.name = name
+    if category_id is not None:
+        event_to_update.category_id=category_id
+
+    if value is not None:
+        event_to_update.value=value
+
+    if date is not None:
+        event_to_update.date=date
 
     db.session.commit()
 
