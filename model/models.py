@@ -71,7 +71,7 @@ class Item(db.Model):
         }
 
 
-class Event:
+class Event(db.Model):
     """Model class used to store Event objects in the database
     """
     __tablename__ = 'event'
