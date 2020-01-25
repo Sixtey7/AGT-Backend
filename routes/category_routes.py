@@ -50,7 +50,7 @@ def update(category_id):
     """Updates the specified Category with the contents of the request body (in JSON)
 
     :param category_id: The id of the Category to be updated
-    :return 200 and the updated Category, 400 if no rquest body has been provided
+    :return 200 and the updated Category, 400 if no request body has been provided
         404 if the specified Category cannot be found
     """
     if not request.json:
@@ -69,8 +69,8 @@ def update(category_id):
 def delete(category_id):
     """Deletes the specified Category from the database
 
-    :param category_id: The ido f the Category to be deleted
-    :return 200 if the Category was successfully deleted, 400 if the Category cannot be found
+    :param category_id: The id of the Category to be deleted
+    :return 200 if the Category was successfully deleted, 404 if the Category cannot be found
     """
     try:
         status = CategoryDB.delete(category_id)
