@@ -1,7 +1,8 @@
 from flask import Flask
 from model.database import db
 from routes.item_routes import item_api
-from routes.category_routes import  category_api
+from routes.category_routes import category_api
+from routes.event_routes import event_api
 from flask_cors import CORS
 
 # create the flask app
@@ -10,9 +11,12 @@ app = Flask(__name__)
 # add in CORS support
 CORS(app, resources={r"/items/*": {"origins": "http://localhost:8080"}})
 CORS(app, resources={r"/categories/*": {"origins": "http://localhost:8080"}})
+CORS(app, resources={r"/events/*": {"origins": "http://localhost:8080:"}})
 
 app.register_blueprint(item_api, url_prefix="/items/")
 app.register_blueprint(category_api, url_prefix="/categories/")
+app.register_blueprint(event_api, url_prefix="/events/")
+
 # SQLAlchemy config
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model/agt-backend.db'
 app.config['SQLALCHEMY_ECHO'] = True
