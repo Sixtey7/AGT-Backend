@@ -27,6 +27,17 @@ Installed the following through pip3
 #### Add a new
 * curl -H "Content-type: application/json" -i -XPOST -d '{"name":"Sample"}' http://localhost:5000/categories/
 
+#### Get All Categories
+* curl http://localhost:5000/categories/
+* curl http://localhost:5000/categories/?full=false
+
+#### Get All Categories and children (items and events)
+* curl http://localhost:5000/categories/?full=true
+
 ### Items
 #### Add a new
 * curl -H "Content-type: application/json" -i -XPOST -d '{"name": "Item 1", "category_id": "800e11e8-da24-4caf-a854-fa0a4efd751e", "item_type": "one_and_done", "current_value":"false", "goal_value": "true", "goal_date":"2020-01-30"}' http://localhost:5000/items/
+
+### Events
+#### Add a new
+* curl -H "Content-type: application/json" -i XPOST -d '{"item_id": "25196e2a-1006-4ef3-be7d-0d754c897c1d", "value":"True", "date": "2020-01-25"}' http://localhost:5000/events/

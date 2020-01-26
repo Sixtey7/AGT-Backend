@@ -39,7 +39,7 @@ def create():
     if not request.json:
         abort(400, 'No request body was provided!')
 
-    event = EventDB.create(request.json['category_id'],
+    event = EventDB.create(request.json['item_id'],
                            request.json['value'],
                            request.json['date'],
                            request.json['id'] if 'id' in request.json else None)
@@ -60,7 +60,7 @@ def update(event_id):
 
     try:
         event = EventDB.update(event_id,
-                               request.json['category_id'] if 'category_id' in request.json else None,
+                               request.json['item_id'] if 'item_id' in request.json else None,
                                request.json['value'] if 'value' in request.json else None,
                                request.json['date'] if 'date' in request.json else None)
 

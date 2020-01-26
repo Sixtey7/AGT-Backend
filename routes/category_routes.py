@@ -10,6 +10,9 @@ def get_all():
 
     :return the result as a json array
     """
+    if request.args.get('full') == 'true':
+        return jsonify([category.to_full_obj() for category in CategoryDB.get_all()]), 200
+
     return jsonify([category.to_obj() for category in CategoryDB.get_all()]), 200
 
 

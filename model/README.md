@@ -9,6 +9,8 @@ Holds the database related files
     * UUID
 * name
     * string
+* items
+    * list of Item
 
 ### Item
 * id
@@ -28,6 +30,8 @@ Holds the database related files
     * string
 * goal_date
     * date
+* events
+    * list of Event
     
 ### Event
 * id

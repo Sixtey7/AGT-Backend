@@ -1,6 +1,7 @@
 import enum
 from model.database import db
 from sqlalchemy import Column, Date, String, ForeignKey, Enum
+from sqlalchemy.orm import relationship
 
 
 class Category(db.Model):
@@ -9,6 +10,7 @@ class Category(db.Model):
     __tablename__ = "category"
     id = Column(String, primary_key=True)
     name = Column(String)
+    items = relationship("Item", back_populates="category")
 
     def __repr__(self):
         return "<Category(id='%s', name='%s')>" % (self.id, self.name)
@@ -21,7 +23,18 @@ class Category(db.Model):
 
         return {
             'id': self.id,
-            'name': self.name
+            'name': self.name,
+        }
+
+    def to_full_obj(self):
+        """Returns the object and all child objects in JSON format
+
+        :return: String representation of the object and all child objects"""
+
+        return {
+            'id': self.id,
+            'name': self.name,
+            'items': [item.to_obj() for item in self.items]
         }
 
 
@@ -49,6 +62,8 @@ class Item(db.Model):
     current_value = Column(String)
     goal_value = Column(String)
     goal_date = Column(Date)
+    category = relationship("Category", back_populates="items")
+    events = relationship("Event", back_populates="item")
 
     def __repr__(self):
         return "<Item(id='%s', name='%s', item_type='%s', category_id='%s', current_value='%s', goal_value='%s'>" % \
@@ -67,7 +82,8 @@ class Item(db.Model):
             'current_value': self.current_value,
             'goal_value': self.goal_value,
             'item_type': self.item_type.to_json(),
-            'goal_date': self.goal_date if self.goal_date is not None else ''
+            'goal_date': self.goal_date if self.goal_date is not None else '',
+            'events': [event.to_obj() for event in self.events]
         }
 
 
@@ -76,23 +92,24 @@ class Event(db.Model):
     """
     __tablename__ = 'event'
     id = Column(String, primary_key=True)
-    category_id = Column(String, ForeignKey('category.id'))
+    item_id = Column(String, ForeignKey('item.id'))
     value = Column(String)
     date = Column(Date)
+    item = relationship("Item", back_populates="events")
 
     def __repr__(self):
-        return "<Event(id='%s', category_id='%s', value='%s', date='%s'>" % \
-               (self.id, self.category_id, self.value, self.date)
+        return "<Event(id='%s', item_id='%s', value='%s', date='%s'>" % \
+               (self.id, self.item_id, self.value, self.date)
 
     def to_obj(self):
         """Returns the object in JSON format
 
-        :return: String reprentation of the object
+        :return: String representation of the object
         """
 
         return {
             'id': self.id,
-            'category_id': self.category_id,
+            'item_id': self.item_id,
             'value': self.value,
             'date': self.date
         }

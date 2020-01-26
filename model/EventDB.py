@@ -1,6 +1,7 @@
 from model.database import db
 from model.models import Event
 from uuid import uuid4
+from datetime import date
 
 
 def get_all():
@@ -22,12 +23,12 @@ def get(event_id):
     return Event.query.filter_by(id=event_id).first()
 
 
-def create(category_id, value, date, event_id=None):
+def create(item_id, value, event_date, event_id=None):
     """Creates a Event given the provided values
 
-    :param category_id: The id of the category associated with the Event
+    :param item_id: The id of the Item associated with the Event
     :param value: The value of the Event
-    :param date: The date of the Event
+    :param event_date: The date of the Event
     :param event_id: The id to assign to the Event.  If not provided, a uuid will be generated
     :return The created Event object
     :rtype Event
@@ -36,7 +37,12 @@ def create(category_id, value, date, event_id=None):
     if event_id is None:
         event_id = str(uuid4())
 
-    new_event = Event(id=event_id, category_id=category_id, value=value, date=date)
+    date_parts = [int(x) for x in event_date.split('-')]
+    # TODO: Should probably eventually add some validation here
+    # TODO: This should likely be pulled out to a common function
+    date_obj = date(date_parts[0], date_parts[1], date_parts[2])
+
+    new_event = Event(id=event_id, item_id=item_id, value=value, date=date_obj)
 
     db.session.add(new_event)
     db.session.commit()
@@ -44,11 +50,11 @@ def create(category_id, value, date, event_id=None):
     return new_event
 
 
-def update(event_id, category_id, value,  date):
+def update(event_id, item_id, value,  date):
     """Updates the specified Event with the provided value
 
     :param event_id: The id of the Event to be updated
-    :param category_id: The category_id to assign to the specified Event
+    :param item_id: The item_id to assign to the specified Event
     :param value: The value to assign to the specified Event
     :param date: The date to assign to the specified Event
     :return The updated Event object
@@ -61,8 +67,8 @@ def update(event_id, category_id, value,  date):
     if event_to_update is None:
         raise ValueError("Could not find Event with provided id %s" % event_id)
 
-    if category_id is not None:
-        event_to_update.category_id=category_id
+    if item_id is not None:
+        event_to_update.item_id=item_id
 
     if value is not None:
         event_to_update.value=value
