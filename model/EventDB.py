@@ -37,11 +37,7 @@ def create(item_id, value, event_date, event_id=None):
     if event_id is None:
         event_id = str(uuid4())
 
-    date_parts = [int(x) for x in event_date.split('-')]
-    # TODO: Should probably eventually add some validation here
-    # TODO: This should likely be pulled out to a common function
-    date_obj = date(date_parts[0], date_parts[1], date_parts[2])
-
+    date_obj = date.fromisoformat(event_date)
     new_event = Event(id=event_id, item_id=item_id, value=value, date=date_obj)
 
     db.session.add(new_event)
