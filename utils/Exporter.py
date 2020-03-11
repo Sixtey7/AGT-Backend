@@ -14,7 +14,13 @@ def export_all_data():
     # TODO: Flesh out this proof of concept
     for category in all_categories:
         for item in category.items:
-            for event in item.events:
-                print(event.date)
+            line = category.name + ',' + item.name + ',' + item.current_value + ',' + item.goal_value + ',' \
+                   + str(item.goal_date)
+            if len(item.events) > 0:
+                line += ',"'
+                for event in item.events:
+                    line += str(event.date) + '\n'
+                line += '"'
+            print(line)
 
     print("Finished printing out everything")
