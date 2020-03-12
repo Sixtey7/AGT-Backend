@@ -11,7 +11,7 @@ def export_all_data():
     all_categories = CategoryDB.get_all()
 
     print("About to print out everything")
-    # TODO: Flesh out this proof of concept
+
     for category in all_categories:
         for item in category.items:
             line = category.name + ',' + item.name + ',' + item.current_value + ',' + item.goal_value + ',' \
