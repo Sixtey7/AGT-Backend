@@ -12,6 +12,8 @@ def export_all_data():
 
     print("About to print out everything")
 
+    return_string = ""
+
     for category in all_categories:
         for item in category.items:
             line = category.name + ',' + item.name + ',' + item.current_value + ',' + item.goal_value + ',' \
@@ -21,6 +23,10 @@ def export_all_data():
                 for event in item.events:
                     line += str(event.date) + '\n'
                 line += '"'
-            print(line)
 
+            return_string += line + '\n'
+
+    print(return_string)
     print("Finished printing out everything")
+
+    return return_string

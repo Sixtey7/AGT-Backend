@@ -10,5 +10,6 @@ def export_all():
 
     :return the contents of the database as comma-seperated-values
     """
-    Exporter.export_all_data()
-    return '', 200
+    export_return = Exporter.export_all_data()
+
+    return export_return, 200
