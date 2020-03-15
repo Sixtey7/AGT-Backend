@@ -16,12 +16,10 @@ def export_all_data():
 
     for category in all_categories:
         for item in category.items:
-            line = category.name + ',' + item.name + ',' + item.current_value + ',' + item.goal_value + ',' \
-                   + str(item.goal_date)
+            line = ','.join([category.name, item.name, item.current_value, str(item.goal_date)])
             if len(item.events) > 0:
                 line += ',"'
-                for event in item.events:
-                    line += str(event.date) + '\n'
+                line += '\n'.join([str(event.date) for event in item.events])
                 line += '"'
 
             return_string += line + '\n'
