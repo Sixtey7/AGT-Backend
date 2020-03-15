@@ -19,7 +19,7 @@ def export_all_data():
             line = ','.join([category.name, item.name, item.current_value, str(item.goal_date)])
             if len(item.events) > 0:
                 line += ',"'
-                line += '\n'.join([str(event.date) for event in item.events])
+                line += ';'.join([str(event.date) for event in item.events])
                 line += '"'
 
             return_string += line + '\n'
