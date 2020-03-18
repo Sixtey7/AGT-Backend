@@ -19,7 +19,8 @@ def export_all():
 def import_all():
     """Imports all of the data into the database from a CSV file
     """
-    if not request.json:
+    print (request.data)
+    if not request.data:
         abort(400, 'No request body provided')
 
-    Exporter.import_all_date(request.json['input_string'])
+    Exporter.import_all_date(request.data)

@@ -36,3 +36,5 @@ def import_all_date(input_string):
     :param input_string: A string containing the data to be imported
     """
     print('Got the input string %s' % input_string)
+    all_lines = input_string.split('\n')
+    print('Got %n lines' % len(all_lines))
