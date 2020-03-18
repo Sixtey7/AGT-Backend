@@ -19,8 +19,10 @@ def export_all():
 def import_all():
     """Imports all of the data into the database from a CSV file
     """
-    print (request.data)
+    print(request.data)
     if not request.data:
         abort(400, 'No request body provided')
+    import_string = request.data.decode()
+    Exporter.import_all_date(import_string)
 
-    Exporter.import_all_date(request.data)
+    return '', 200
