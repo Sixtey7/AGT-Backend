@@ -41,3 +41,10 @@ Installed the following through pip3
 ### Events
 #### Add a new
 * curl -H "Content-type: application/json" -i XPOST -d '{"item_id": "25196e2a-1006-4ef3-be7d-0d754c897c1d", "value":"True", "date": "2020-01-25"}' http://localhost:5000/events/
+
+### Export/Import
+#### Export All
+* curl http://localhost:5000/export/
+
+#### Import from CSV
+* curl -H "Content-type: text/csv" -XPUT --data-binary @<location_of_file> -i http://localhost:5000/export/
