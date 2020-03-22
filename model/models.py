@@ -66,8 +66,9 @@ class Item(db.Model):
     events = relationship("Event", back_populates="item")
 
     def __repr__(self):
-        return "<Item(id='%s', name='%s', item_type='%s', category_id='%s', current_value='%s', goal_value='%s'>" % \
-               (self.id, self.name, self.item_type, self.category_id, self.current_value, self.goal_value)
+        return "<Item(id='%s', name='%s', item_type='%s', category_id='%s', current_value='%s', goal_value='%s', " \
+                    "goal_date='%s'>" % \
+               (self.id, self.name, self.item_type, self.category_id, self.current_value, self.goal_value, str(self.goal_date))
 
     def to_obj(self):
         """Returns the object in JSON format
@@ -99,7 +100,7 @@ class Event(db.Model):
 
     def __repr__(self):
         return "<Event(id='%s', item_id='%s', value='%s', date='%s'>" % \
-               (self.id, self.item_id, self.value, self.date)
+               (self.id, self.item_id, self.value, str(self.date))
 
     def to_obj(self):
         """Returns the object in JSON format
