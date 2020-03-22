@@ -35,6 +35,9 @@ def export_all_data():
 def import_all_date(input_string):
     """Facilitates the importing of all data from a CSV format
 
+    Assumes that the database is clean when it runs
+    Possibility to duplicate data if that is not the case
+
     :param input_string: A string containing the data to be imported
     """
     print('Got the input string %s' % input_string)
@@ -73,6 +76,12 @@ def import_all_date(input_string):
 
 
 def _build_date_obj(date_str):
+    """Helper method used to decompose the date strings in the export into date objects
+
+    :param date_str: The date string in format YYYY-MM-DD
+    :return: Date object based on the provided value
+    :rtype: date
+    """
     print('parsing date_str %s' % date_str)
     date_parts = [int(x) for x in date_str.split('-')]
     date_obj = date(date_parts[0], date_parts[1], date_parts[2])
