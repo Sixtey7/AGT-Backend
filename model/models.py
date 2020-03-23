@@ -50,6 +50,17 @@ class ItemType(enum.Enum):
         """
         return self.name
 
+    def value_string(self):
+        """Returns the value of the enum as a string
+
+        :return the value of the array
+        :rtype string
+        """
+        return '%d' % self.value
+
+    def __str__(self):
+        return self.name
+
 
 class Item(db.Model):
     """Model class used to store Item objects in the database

@@ -13,7 +13,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/items/*": {"origins": "http://localhost:8080"}})
 CORS(app, resources={r"/categories/*": {"origins": "http://localhost:8080"}})
 CORS(app, resources={r"/events/*": {"origins": "http://localhost:8080"}})
-CORS(app, resources={"r/export/*": {"origins": "http://localhost:8080"}})
+CORS(app, resources={r"/export/*": {"origins": "http://localhost:8080"}})
 
 app.register_blueprint(item_api, url_prefix="/items/")
 app.register_blueprint(category_api, url_prefix="/categories/")

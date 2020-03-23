@@ -94,3 +94,10 @@ def delete(event_id):
     db.session.commit()
 
     return True
+
+
+def delete_all():
+    """Deletes all of the Categories in the database
+    """
+
+    Event.query.delete()
