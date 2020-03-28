@@ -15,7 +15,7 @@ def export_all():
     return export_return, 200
 
 
-@export_api.route('', methods=['PUT'])
+@export_api.route('', methods=['POST'])
 def import_all():
     """Imports all of the data into the database from a CSV file
     """

@@ -47,4 +47,4 @@ Installed the following through pip3
 * curl http://localhost:5000/export/
 
 #### Import from CSV
-* curl -H "Content-type: text/csv" -XPUT --data-binary @<location_of_file> -i http://localhost:5000/export/
+* curl -H "Content-type: text/csv" -XPOST --data-binary @<location_of_file> -i http://localhost:5000/export/
