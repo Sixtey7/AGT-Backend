@@ -19,6 +19,7 @@ Installed the following through pip3
 * flask
 * sqlalchemy
 * flask-sqlalchemy
+* flask-cors
 
 ## Example Curl Statements
 
