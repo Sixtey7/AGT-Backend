@@ -32,4 +32,4 @@ db.app = app
 import model.models
 db.create_all()
 
-app.run(port=5000, debug=True)
+app.run(host='0.0.0.0', port=5000, debug=True)
