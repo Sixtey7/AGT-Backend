@@ -1,19 +1,13 @@
 FROM ubuntu:16.04
-
-MAINTANER Patrick Shaw "sixtey7@gmail.com"
-
-RUN apt-get update -y && \
-    apt-get install -y python3-pip python3-dev
-
-# We copy just the requirements.txt first to leverage Docker cache
-COPY ./requirements.txt /app/requirements.txt
-
-WORKDIR /app
+g
+RUN apt-get update
+RUN apt-get install python3-pip
+RUN apt-get install flask
 
 RUN pip3 install -r requirements.txt
 
-COPY . /app
+ADD agt-backend-app.py /
 
-ENTRYPOINT [ "python3" ]
+WORKDIR /
 
-CMD [ "app.py" ]
+CMD [ "python3", "app.py" ]
