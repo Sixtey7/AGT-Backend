@@ -1,8 +1,8 @@
 FROM ubuntu:16.04
-g
+
 RUN apt-get update
-RUN apt-get install python3-pip
-RUN apt-get install flask
+RUN apt-get install -y python3-pip
+RUN apt-get install -y flask
 
 RUN pip3 install -r requirements.txt
 
