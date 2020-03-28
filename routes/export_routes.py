@@ -8,7 +8,7 @@ export_api = Blueprint('export_api', __name__)
 def export_all():
     """Exports all of the data in the database as a CSV File
 
-    :return the contents of the database as comma-seperated-values
+    :return the contents of the database as comma-separated-values
     """
     export_return = Exporter.export_all_data()
 
