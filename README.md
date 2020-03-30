@@ -49,3 +49,10 @@ Installed the following through pip3
 
 #### Import from CSV
 * curl -H "Content-type: text/csv" -XPOST --data-binary @<location_of_file> -i http://localhost:5000/export/
+
+## Sample Docker Commands
+### Building
+* docker build -t agt-backend:latest .
+
+### Running
+* docker run --name agt-backend -p 5000:5000 -d agt-backend:latest
