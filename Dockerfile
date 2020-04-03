@@ -1,9 +1,8 @@
-FROM ubuntu:16.04
+FROM python:alpine3.7
 
-RUN apt-get update
-RUN apt-get install -y python3-pip
 
-ADD . /
+COPY . /
+WORKDIR /
 RUN pip3 install -r requirements.txt
 
 WORKDIR /
