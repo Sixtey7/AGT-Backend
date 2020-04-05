@@ -23,10 +23,10 @@ app.register_blueprint(export_api, url_prefix="/export/")
 
 # SQLAlchemy config
 # read in the location of the database
-db_location = os.environ['DB_LOC']
-if db_location:
+if 'DB_LOC' in os.environ:
+    db_location = os.environ['DB_LOC']
     print('DB Location was set, using location: ' + db_location)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqllite:///' + db_location + '/agt-backend.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_location + '/agt-backend.db'
 else:
     print('location not set, using default of ./model/')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model/agt-backend.db'
