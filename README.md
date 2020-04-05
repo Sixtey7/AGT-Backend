@@ -56,3 +56,6 @@ Installed the following through pip3
 
 ### Running
 * docker run --name agt-backend -p 5000:5000 -d agt-backend:latest
+
+### Running with a static db file
+* docker run --name agt-backend -p 5000:5000 -e DB_LOC=/data/sqlite -v /data/sqlite:/data/sqlite -d agt-backend:latest
