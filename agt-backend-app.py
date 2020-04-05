@@ -52,16 +52,6 @@ else:
     print('no database was specified, assuming sqlite')
     init_sqlite()
 
-# read in the location of the database
-if 'DB_LOC' in os.environ:
-    db_location = os.environ['DB_LOC']
-    print('DB Location was set, using location: ' + db_location)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_location + '/agt-backend.db'
-else:
-    print('location not set, using default of ./model/')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model/agt-backend.db'
-
-app.config['SQLALCHEMY_ECHO'] = True
 db.init_app(app)
 
 db.app = app
