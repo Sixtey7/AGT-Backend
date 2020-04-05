@@ -11,8 +11,8 @@ import os
 app = Flask(__name__)
 
 
-def init_sqlite(location=None):
-    print ('Standing up sqlite')
+def init_sqlite():
+    print('Standing up sqlite')
 
     if 'DB_LOC' in os.environ:
         location = os.environ['DB_LOC']
@@ -28,7 +28,45 @@ def init_sqlite(location=None):
 
 def init_postgres():
     print('Standing up postgres')
+
+    # READ in or default a bunch of config values
+    if 'SERVER_URL' in os.environ:
+        server_url = os.environ['SERVER_URL']
+    else:
+        print('server url not specified, assuming localhost')
+        server_url = 'localhost'
+    print('Using server url of: ' + server_url)
+
+    if 'SERVER_PORT' in os.environ:
+        server_port = os.environ['SERVER_PORT']
+    else:
+        print('server port not specified, assuming 5432')
+        server_port = 5432
+    print('using server port of: ' + server_port)
+
+    if 'DB_NAME' in os.environ:
+        db_name = os.environ['DB_NAME']
+    else:
+        print('database name not specified, assuming agt_db')
+        db_name = 'agt_db'
+    print('using database name of: ' + db_name)
+
+    if 'DB_USER' in os.environ:
+        db_user = os.environ['DB_USER']
+    else:
+        print('db user not specified, assuming agt_user')
+        db_user = 'agt_user'
+    print('using db user of: ' + db_user)
+
+    if 'DB_PASSWORD' in os.environ:
+        db_password = os.environ['DB_PASSWORD']
+    else:
+        print('db password not specified, using default')
+        db_password = 'password'
+
     # TODO
+    db_path = 'postgresql+psycopg2://%s:%s@%s:%d/%s' % (db_user, db_password, server_url, server_port, db_name)
+    print('built db string %s' % db_path)
 
 
 # add in CORS support
