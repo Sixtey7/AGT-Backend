@@ -16,7 +16,7 @@ def init_sqlite(location=None):
 
     if 'DB_LOC' in os.environ:
         location = os.environ['DB_LOC']
-    else
+    else:
         print('location not set, using default of ./model/')
         location = 'model/'
 
