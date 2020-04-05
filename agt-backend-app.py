@@ -5,6 +5,7 @@ from routes.category_routes import category_api
 from routes.event_routes import event_api
 from routes.export_routes import export_api
 from flask_cors import CORS
+import os
 
 # create the flask app
 app = Flask(__name__)
@@ -21,7 +22,15 @@ app.register_blueprint(event_api, url_prefix="/events/")
 app.register_blueprint(export_api, url_prefix="/export/")
 
 # SQLAlchemy config
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model/agt-backend.db'
+# read in the location of the database
+db_location = os.environ['DB_LOC']
+if db_location:
+    print('DB Location was set, using location: ' + db_location)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqllite:///' + db_location + '/agt-backend.db'
+else:
+    print('location not set, using default of ./model/')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///model/agt-backend.db'
+
 app.config['SQLALCHEMY_ECHO'] = True
 db.init_app(app)
 
