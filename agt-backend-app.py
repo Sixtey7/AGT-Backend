@@ -42,13 +42,13 @@ def init_postgres():
     else:
         print('server port not specified, assuming 5432')
         server_port = 5432
-    print('using server port of: ' + server_port)
+    print('using server port of: %d' % server_port)
 
     if 'DB_NAME' in os.environ:
         db_name = os.environ['DB_NAME']
     else:
         print('database name not specified, assuming agt_db')
-        db_name = 'agt_db'
+        db_name = 'agt'
     print('using database name of: ' + db_name)
 
     if 'DB_USER' in os.environ:
