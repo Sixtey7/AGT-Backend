@@ -2,6 +2,7 @@ FROM python:alpine3.7
 
 COPY . /app
 WORKDIR /app
+
 RUN apk add --no-cache --virtual .build-deps \
     gcc \
     python3-dev \
