@@ -9,6 +9,6 @@ RUN apk add --no-cache --virtual .build-deps \
     musl-dev \
     postgresql-dev
 
-RUN pip3 install -r prod-requirements.txt
+RUN pip3 install -r requirements.txt
 
 CMD [ "python3", "agt-backend-app.py" ]
