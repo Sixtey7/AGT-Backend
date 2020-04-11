@@ -64,7 +64,6 @@ def init_postgres():
         print('db password not specified, using default')
         db_password = 'password'
 
-    # TODO
     db_path = 'postgresql+psycopg2://%s:%s@%s:%d/%s' % (db_user, db_password, server_url, server_port, db_name)
     print('built db string %s' % db_path)
     app.config['SQLALCHEMY_DATABASE_URI'] = db_path
