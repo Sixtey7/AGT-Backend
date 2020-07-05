@@ -64,4 +64,4 @@ Installed the following through pip3
 * docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v /data/postgres:/var/lib/postgresql/data postgres
 
 ### Run backend with raspberrypi postgres
-* docker run --name agt-backend -p 5000:5000 -e DB_LOC=/data/sqlite -e DB_TYPE=postgres -e SERVER_URL=raspberrypi -v /data/sqlite:/data/sqlite -d agt-backend:latest
+* docker run --name agt-backend -p 5000:5000 -e DB_TYPE=postgres -e SERVER_URL=raspberrypi -d agt-backend:latest
